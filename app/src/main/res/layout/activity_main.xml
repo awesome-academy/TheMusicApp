@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity2">
+        tools:context=".ui.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -14,22 +14,102 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+            app:layout_constraintBottom_toTopOf="@+id/layout_player_controller"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_graph" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_player_controller"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_60"
+            android:background="@drawable/bg_solid_chinese_black_stroke_spanish_gray"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_track"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginStart="@dimen/dp_16"
+                android:src="@drawable/ic_launch"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/circle" />
+
+            <TextView
+                android:id="@+id/text_song_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/dp_8"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/image_track"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_song_singer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="@id/text_song_name"
+                app:layout_constraintStart_toStartOf="@id/text_song_name"
+                app:layout_constraintTop_toBottomOf="@id/text_song_name" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/dp_8"
+                android:src="@drawable/ic_previous"
+                app:layout_constraintBottom_toBottomOf="@id/image_play_song"
+                app:layout_constraintEnd_toStartOf="@id/image_play_song"
+                app:layout_constraintTop_toTopOf="@id/image_play_song" />
+
+            <ImageButton
+                android:id="@+id/image_next_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/dp_8"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/image_play_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_pause"
+                app:layout_constraintBottom_toBottomOf="@id/image_next_song"
+                app:layout_constraintEnd_toStartOf="@id/image_next_song"
+                app:layout_constraintTop_toTopOf="@id/image_next_song" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/color_chinese_black"
+            app:itemIconTint="@color/bottom_tab_item_foreground"
+            app:itemTextColor="@color/bottom_tab_item_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/activity_main" />
+            app:menu="@menu/activity_main">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
