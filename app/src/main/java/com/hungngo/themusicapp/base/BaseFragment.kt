@@ -9,7 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) : Fragment() {
+abstract class BaseFragment<out B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
+    Fragment() {
 
     private var _binding: B? = null
     protected val binding get() = _binding
