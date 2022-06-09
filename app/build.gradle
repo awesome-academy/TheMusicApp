@@ -16,6 +16,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_KEY", "\"${API_KEY}\""
     }
 
     buildFeatures {
@@ -74,4 +76,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
+
+    implementation "io.insert-koin:koin-core:3.1.2"
+    implementation "io.insert-koin:koin-android:3.1.2"
 }
