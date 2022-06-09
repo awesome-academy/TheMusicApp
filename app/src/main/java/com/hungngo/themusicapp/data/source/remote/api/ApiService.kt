@@ -8,4 +8,10 @@ interface ApiService {
 
     @GET("/playlist/")
     suspend fun getPlayListByID(@Query("id") playListID: String): PlayListResponse
+
+    @GET("/search/")
+    suspend fun searchItem(
+        @Query("q") searchQuery: String,
+        @Query("type") searchType: String
+    )
 }
