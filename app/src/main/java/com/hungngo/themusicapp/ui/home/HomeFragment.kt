@@ -15,4 +15,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+    override fun init() {
+
+    }
 }

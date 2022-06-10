@@ -21,6 +21,9 @@ abstract class BaseFragment<out B : ViewDataBinding>(@LayoutRes private val layo
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
+
+        init()
+
         return binding?.root
     }
 
@@ -28,4 +31,6 @@ abstract class BaseFragment<out B : ViewDataBinding>(@LayoutRes private val layo
         super.onDestroy()
         _binding = null
     }
+
+    abstract fun init()
 }
