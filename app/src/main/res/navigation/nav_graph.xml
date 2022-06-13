@@ -9,15 +9,35 @@
         android:id="@+id/homeFragment"
         android:name="com.hungngo.themusicapp.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.hungngo.themusicapp.ui.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_playlistFragment2"
+            app:destination="@id/playlistFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.hungngo.themusicapp.ui.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.hungngo.themusicapp.ui.playlist.PlaylistFragment"
+        android:label="PlaylistFragment" >
+        <argument
+            android:name="data"
+            app:argType="com.hungngo.themusicapp.data.model.Data" />
+    </fragment>
 </navigation>
