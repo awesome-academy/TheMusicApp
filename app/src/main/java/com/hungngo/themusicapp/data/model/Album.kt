@@ -22,5 +22,7 @@ data class Album (
     @SerializedName("type")
     val type: String? = null,
     @SerializedName("uri")
-    val uri: String? = null
+    val uri: String? = null,
+    @SerializedName("coverArt")
+    val coverArt: CoverArt
 )

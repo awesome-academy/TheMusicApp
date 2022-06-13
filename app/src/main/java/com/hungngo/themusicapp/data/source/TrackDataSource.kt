@@ -1,10 +1,10 @@
 package com.hungngo.themusicapp.data.source
 
-import com.hungngo.themusicapp.data.model.PlayListResponse
+import com.hungngo.themusicapp.data.model.SearchTrackResponse
 
 interface TrackDataSource {
 
     interface Remote {
-        suspend fun getPlayListByID(playlistId: String) : PlayListResponse
+        suspend fun searchTrack(query: String, type: String) : SearchTrackResponse
     }
 }

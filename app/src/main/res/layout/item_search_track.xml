@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <data>
+        <variable
+            name="item"
+            type="com.hungngo.themusicapp.data.model.ItemSearch" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_8"
         android:background="@android:color/transparent">
 
@@ -21,6 +27,7 @@
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_80"
                 android:scaleType="centerCrop"
+                imageUrl="@{item.data.albumOfTrack.coverArt.sources.get(2).url}"
                 android:src="@drawable/bg_splashscreen" />
         </androidx.cardview.widget.CardView>
 
@@ -30,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/app_name"
+            android:text="@{item.data.name}"
             android:textColor="@color/color_white"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
@@ -44,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_8"
-            android:text="@string/app_name"
+            android:text="@{item.data.artists.items.get(0).profile.name}"
             android:textColor="@color/color_spanish_gray"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="parent"
