@@ -3,18 +3,20 @@ package com.hungngo.themusicapp.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hungngo.themusicapp.base.BaseViewModel
-import com.hungngo.themusicapp.data.TrackRepository
-import com.hungngo.themusicapp.data.model.SearchTrackResponse
+import com.hungngo.themusicapp.data.ItemSearchRepository
+import com.hungngo.themusicapp.data.model.ItemsSearchResponse
 
-class SearchViewModel(private val trackRepository: TrackRepository) : BaseViewModel() {
+class SearchViewModel(
+    private val artistRepository: ItemSearchRepository
+) : BaseViewModel() {
 
-    private var _tracks: MutableLiveData<SearchTrackResponse> = MutableLiveData()
-    val tracks: LiveData<SearchTrackResponse> get() = _tracks
+    private var _searchResponse: MutableLiveData<ItemsSearchResponse> = MutableLiveData()
+    val searchResponse: LiveData<ItemsSearchResponse> get() = _searchResponse
 
-    fun searchTrack(query: String, type: String) {
+    fun searchItems(query: String, type: String) {
         launchTaskSync(
-            onRequest = { trackRepository.searchItem(query, type) },
-            onSuccess = { _tracks.postValue(it) }
+            onRequest = { artistRepository.searchArtist(query, type) },
+            onSuccess = { _searchResponse.postValue(it) }
         )
     }
 }

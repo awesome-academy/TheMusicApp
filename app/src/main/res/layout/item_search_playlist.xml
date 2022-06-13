@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.hungngo.themusicapp.data.model.ItemSearch" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_margin="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_8"
-        android:layout_margin="@dimen/dp_8">
+        android:background="@android:color/transparent">
 
         <ImageView
             android:id="@+id/image_search_playlist"
+            imageUrl='@{item.data.images.items.size() != 0 ? item.data.images.items.get(0).sources.get(0).url : ""}'
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launch"
+            android:layout_height="@dimen/dp_150"
             android:scaleType="centerCrop"
+            android:src="@drawable/ic_launch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/color_white"
             android:layout_marginTop="@dimen/dp_8"
-            app:layout_constraintTop_toBottomOf="@id/image_search_playlist"
+            android:text="@{item.data.name}"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/image_search_playlist" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

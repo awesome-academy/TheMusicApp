@@ -2,7 +2,7 @@ package com.hungngo.themusicapp.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TracksInSearch(
+data class ItemsInSearch(
     @SerializedName("items")
     val itemSearches: List<ItemSearch>? = null,
     @SerializedName("totalCount")
