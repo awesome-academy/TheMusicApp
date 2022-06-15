@@ -8,7 +8,7 @@ data class Album (
     @SerializedName("artists")
     val artists: List<Artist>? = null,
     @SerializedName("id")
-    val id: String,
+    val id: String? = null,
     @SerializedName("images")
     val images: List<Image>? = null,
     @SerializedName("name")
@@ -24,5 +24,9 @@ data class Album (
     @SerializedName("uri")
     val uri: String? = null,
     @SerializedName("coverArt")
-    val coverArt: CoverArt
+    val coverArt: CoverArt? = null,
+    @SerializedName("label")
+    val label: String? = null,
+    @SerializedName("tracks")
+    val tracks: Tracks? = null
 )

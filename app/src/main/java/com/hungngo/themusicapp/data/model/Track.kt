@@ -1,8 +1,10 @@
 package com.hungngo.themusicapp.data.model
 
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class Track (
+data class Track(
     @SerializedName("album")
     var album: Album? = null,
     @SerializedName("artists")
@@ -27,4 +29,16 @@ data class Track (
     var trackNumber: Int = 0,
     @SerializedName("type")
     var type: String? = null
-)
+) : Serializable {
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<Track>() {
+            override fun areItemsTheSame(oldItemSearch: Track, newItemSearch: Track): Boolean {
+                return oldItemSearch.id == newItemSearch.id
+            }
+
+            override fun areContentsTheSame(oldItemSearch: Track, newItemSearch: Track): Boolean {
+                return oldItemSearch == newItemSearch
+            }
+        }
+    }
+}
