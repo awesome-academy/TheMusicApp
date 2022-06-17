@@ -1,5 +1,6 @@
 package com.hungngo.themusicapp.di
 
+import com.hungngo.themusicapp.ui.MainViewModel
 import com.hungngo.themusicapp.ui.home.HomeViewModel
 import com.hungngo.themusicapp.ui.playlist.PlaylistViewModel
 import com.hungngo.themusicapp.ui.search.SearchViewModel
@@ -11,4 +12,5 @@ val ViewModelModule: Module = module {
     viewModel { HomeViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { PlaylistViewModel(get()) }
+    viewModel { MainViewModel(get(), get())}
 }

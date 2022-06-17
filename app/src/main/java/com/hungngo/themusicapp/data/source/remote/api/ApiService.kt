@@ -3,6 +3,7 @@ package com.hungngo.themusicapp.data.source.remote.api
 import com.hungngo.themusicapp.data.model.AlbumResponse
 import com.hungngo.themusicapp.data.model.PlayListResponse
 import com.hungngo.themusicapp.data.model.ItemsSearchResponse
+import com.hungngo.themusicapp.data.model.TrackRespond
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -21,4 +22,9 @@ interface ApiService {
     suspend fun getAlbumByID(
         @Query("ids") idAlbum: String
     ): AlbumResponse
+
+    @GET("/tracks/")
+    suspend fun getTrackByID(
+        @Query("ids") idTrack: String
+    ): TrackRespond
 }

@@ -7,14 +7,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.hungngo.themusicapp.R
 import com.hungngo.themusicapp.base.BaseFragment
-import com.hungngo.themusicapp.data.model.Data
 import com.hungngo.themusicapp.databinding.FragmentSearchBinding
 import com.hungngo.themusicapp.ui.search.adapter.ArtistListAdapter
 import com.hungngo.themusicapp.ui.search.adapter.PlayListListAdapter
 import com.hungngo.themusicapp.ui.search.adapter.TrackAdapter
+import com.hungngo.themusicapp.utils.Constant
 import com.hungngo.themusicapp.utils.extension.hide
 import com.hungngo.themusicapp.utils.extension.show
-import com.hungngo.themusicapp.utils.Constant
 import com.hungngo.themusicapp.utils.extension.showToast
 import com.hungngo.themusicapp.utils.onClick.OnClickTrackListener
 import kotlinx.coroutines.Job
@@ -23,7 +22,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search), OnClickTrackListener {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search),
+    OnClickTrackListener {
 
     private val searchViewModel: SearchViewModel by viewModel()
     private val trackAdapter by lazy { TrackAdapter() }
@@ -131,8 +131,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding?.progressSearch?.hide()
     }
 
-    override fun onItemClick(data: Data) {
-        val bundle = bundleOf(Constant.BUNDLE_DATA to data)
+    override fun onItemClick(idTrack: String, idAlbum: String) {
+        val bundle = bundleOf(
+            Constant.BUNDLE_ID_TRACK to idTrack,
+            Constant.BUNDLE_ID_ALBUM to idAlbum
+        )
         findNavController().navigate(
             R.id.action_searchFragment_to_playlistFragment,
             bundle

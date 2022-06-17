@@ -1,10 +1,10 @@
 package com.hungngo.themusicapp.data.source
 
-import com.hungngo.themusicapp.data.model.SearchTrackResponse
+import com.hungngo.themusicapp.data.model.TrackRespond
 
 interface TrackDataSource {
 
     interface Remote {
-        suspend fun searchTrack(query: String, type: String) : SearchTrackResponse
+        suspend fun getTrackByID(idTrack: String): TrackRespond
     }
 }

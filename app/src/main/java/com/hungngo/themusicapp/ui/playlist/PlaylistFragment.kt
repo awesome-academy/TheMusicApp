@@ -2,8 +2,10 @@ package com.hungngo.themusicapp.ui.playlist
 
 import android.content.Context
 import androidx.navigation.fragment.navArgs
+import com.hungngo.themusicapp.R
 import com.hungngo.themusicapp.base.BaseFragmentViewBinding
 import com.hungngo.themusicapp.data.model.Album
+import com.hungngo.themusicapp.data.model.Track
 import com.hungngo.themusicapp.databinding.FragmentPlaylistBinding
 import com.hungngo.themusicapp.utils.extension.hide
 import com.hungngo.themusicapp.utils.extension.loadImageWithUrl
@@ -18,6 +20,7 @@ class PlaylistFragment :
     private val args: PlaylistFragmentArgs by navArgs()
     private val idTrack by lazy { args.idTrack }
     private val idAlbum by lazy { args.idAlbum }
+    private var trackPosition = 0
     private var playTrackListener: PlayTrack? = null
 
     override fun onAttach(context: Context) {
@@ -42,7 +45,16 @@ class PlaylistFragment :
             }
             album.observe(viewLifecycleOwner) {
                 setDataToView(it.albums?.first())
+                checkTrackPositionInAlbum(it.albums?.first()?.tracks?.items)
                 albumAdapter.submitList(it.albums?.first()?.tracks?.items)
+            }
+        }
+    }
+
+    private fun checkTrackPositionInAlbum(trackList: List<Track>?) {
+        trackList?.forEachIndexed { index, track ->
+            if (track.id == idTrack) {
+                trackPosition = index
             }
         }
     }
@@ -63,9 +75,8 @@ class PlaylistFragment :
     }
 
     private fun playTracks() {
-        if (idTrack != null) {
-            playTrackListener?.playTracks(idTrack, idAlbum)
-        }
+        playTrackListener?.playTracks(trackPosition, idTrack, idAlbum)
+        binding?.fabButtonPlay?.setImageResource(R.drawable.ic_pause_40)
     }
 
     private fun showProgressBar() {
@@ -77,6 +88,6 @@ class PlaylistFragment :
     }
 
     interface PlayTrack {
-        fun playTracks(idTrack: String, idAlbum: String?)
+        fun playTracks(trackPosition: Int, idTrack: String, idAlbum: String?)
     }
 }
