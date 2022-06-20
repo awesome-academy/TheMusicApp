@@ -37,7 +37,13 @@
         android:name="com.hungngo.themusicapp.ui.playlist.PlaylistFragment"
         android:label="PlaylistFragment" >
         <argument
-            android:name="data"
-            app:argType="com.hungngo.themusicapp.data.model.Data" />
+            android:name="idTrack"
+            app:argType="string"
+            android:defaultValue=' ' />
+        <argument
+            android:name="idAlbum"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue=' ' />
     </fragment>
 </navigation>

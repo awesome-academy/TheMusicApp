@@ -7,4 +7,15 @@
     <string name="title_my_playlist">My Playlist</string>
     <string name="title_search_hint">Searching here</string>
     <string name="title_results">Results</string>
+    <string name="title_search_dialog">Choose type to search</string>
+    <string name="title_play">Play</string>
+    <string name="title_notification_action_previous">Previous</string>
+    <string name="title_notification_action_pause">Pause</string>
+    <string name="title_notification_action_resume">Resume</string>
+    <string name="title_notification_action_next">Next</string>
+    <string name="msg_channel_id">100</string>
+    <string name="msg_channel_name">hungnd</string>
+    <string name="msg_notification_id">1</string>
+    <string name="action_notification">send_action_notification</string>
+    <string name="extra_action">com.hungngo.themusicapp.extra.action</string>
 </resources>

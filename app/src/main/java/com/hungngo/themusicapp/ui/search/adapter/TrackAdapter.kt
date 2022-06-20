@@ -34,7 +34,9 @@ class TrackAdapter : ListAdapter<ItemSearch, TrackAdapter.ViewHolder>(ItemSearch
                 setItem(item)
                 executePendingBindings()
                 root.setOnClickListener {
-                    listener?.onItemClick(item.data)
+                    val idAlbum: String = item.data.albumOfTrack?.id.toString()
+                    val idTrack: String = item.data.id.toString()
+                    listener?.onItemClick(idTrack, idAlbum)
                 }
             }
         }
