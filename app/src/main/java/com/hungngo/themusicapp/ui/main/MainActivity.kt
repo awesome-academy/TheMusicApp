@@ -12,10 +12,10 @@ import com.hungngo.themusicapp.base.BaseActivityViewBinding
 import com.hungngo.themusicapp.data.model.Track
 import com.hungngo.themusicapp.databinding.ActivityMainBinding
 import com.hungngo.themusicapp.service.MusicService
+import com.hungngo.themusicapp.ui.main.bottom_sheet_player.BottomSheetPlayer
 import com.hungngo.themusicapp.ui.playlist.PlaylistFragment
 import com.hungngo.themusicapp.utils.Constant
 import com.hungngo.themusicapp.utils.extension.show
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import java.util.concurrent.Executors

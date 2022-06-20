@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheMusicApp">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true" />
 
         <activity

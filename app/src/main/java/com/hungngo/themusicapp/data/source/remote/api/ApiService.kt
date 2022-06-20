@@ -1,9 +1,6 @@
 package com.hungngo.themusicapp.data.source.remote.api
 
-import com.hungngo.themusicapp.data.model.AlbumResponse
-import com.hungngo.themusicapp.data.model.PlayListResponse
-import com.hungngo.themusicapp.data.model.ItemsSearchResponse
-import com.hungngo.themusicapp.data.model.TrackRespond
+import com.hungngo.themusicapp.data.model.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -27,4 +24,9 @@ interface ApiService {
     suspend fun getTrackByID(
         @Query("ids") idTrack: String
     ): TrackRespond
+
+    @GET("/track_lyrics/")
+    suspend fun getLyricsByID(
+        @Query("id") idTrack: String
+    ): LyricsResponse
 }
