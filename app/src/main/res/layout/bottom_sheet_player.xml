@@ -44,7 +44,7 @@
                 app:layout_constraintStart_toEndOf="@id/button_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/button_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,8 +52,7 @@
                 android:padding="@dimen/dp_16"
                 android:src="@drawable/ic_favorite"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/color_white" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/image_previous_song"

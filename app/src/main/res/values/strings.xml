@@ -4,7 +4,8 @@
     <string name="title_search">Search</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_recently_play">Recently Play</string>
-    <string name="title_my_playlist">My Playlist</string>
+    <string name="title_my_playlist">Albums</string>
+    <string name="title_some_tracks">Some Tracks</string>
     <string name="title_search_hint">Searching here</string>
     <string name="title_results">Results</string>
     <string name="title_search_dialog">Choose type to search</string>
@@ -13,9 +14,19 @@
     <string name="title_notification_action_pause">Pause</string>
     <string name="title_notification_action_resume">Resume</string>
     <string name="title_notification_action_next">Next</string>
+    <string name="title_player">Now Playing</string>
+    <string name="title_download">Download</string>
+    <string name="msg_downloading">Download file…</string>
     <string name="msg_channel_id">100</string>
     <string name="msg_channel_name">hungnd</string>
     <string name="msg_notification_id">1</string>
+    <string name="msg_permission_deny">This action need permission, please turn on!!!</string>
     <string name="action_notification">send_action_notification</string>
     <string name="extra_action">com.hungngo.themusicapp.extra.action</string>
+    <string name="title_swipe_up">Swipe to left for lyric</string>
+    <string name="msg_connect_network">Connect Network</string>
+    <string name="msg_exit_app">exit app</string>
+    <string name="title_alert_delete">Delete Local Track</string>
+    <string name="msg_alert_delete">Are you sure to delete this track?</string>
+    <string name="msg_track_downloaded">You already have this track</string>
 </resources>

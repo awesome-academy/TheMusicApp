@@ -15,6 +15,7 @@ import com.hungngo.themusicapp.data.model.Lyric
 import com.hungngo.themusicapp.data.model.Track
 import com.hungngo.themusicapp.databinding.BottomSheetPlayerBinding
 import com.hungngo.themusicapp.service.MusicService
+import com.hungngo.themusicapp.utils.extension.showToast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,6 +27,7 @@ class BottomSheetPlayer : BottomSheetDialogFragment(), View.OnClickListener {
     private var bottomSheetPlayer: BottomSheetDialog? = null
     private var lyric: Lyric? = null
     private var tabTrackAdapter: TabTrackAdapter? = null
+    private var listener: DownLoadTrack? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,6 +102,46 @@ class BottomSheetPlayer : BottomSheetDialogFragment(), View.OnClickListener {
         }
     }
 
+    fun setService(musicService: MusicService) {
+        this.musicService = musicService
+    }
+
+    fun setTrack(track: Track) {
+        this.track = track
+        bindData(track)
+    }
+
+    fun updateButtonPauseOrResume(isPlaying: Boolean) {
+        binding?.apply {
+            imagePlaySong.setImageResource(if (isPlaying) R.drawable.ic_pause_40 else R.drawable.ic_resume)
+        }
+    }
+
+    fun checkFavorite(isFavorite: Boolean) {
+        track?.isFavorite = isFavorite
+        binding?.buttonFavorite?.setImageResource(
+            if (isFavorite) R.drawable.ic_favorite_red
+            else R.drawable.ic_favorite
+        )
+    }
+
+    fun setLyric(lyric: Lyric) {
+        this.lyric = lyric
+        setUpTabLayoutAndViewPager()
+    }
+
+    fun setListener(listener: DownLoadTrack) {
+        this.listener = listener
+    }
+
+    fun setProgress(progress: Int) {
+        binding?.apply {
+            seekBarTrack.progress = progress.div(MILIS_TO_SECOND)
+            textElapsed.text = SimpleDateFormat(TIME_PATTERN, Locale.getDefault())
+                .format(musicService?.getCurrentProgress())
+        }
+    }
+
     private fun bindData(track: Track) {
         binding?.apply {
             seekBarTrack.max = musicService?.getDuration()?.div(MILIS_TO_SECOND) ?: TIME_DEFAULT
@@ -123,30 +165,12 @@ class BottomSheetPlayer : BottomSheetDialogFragment(), View.OnClickListener {
         }
     }
 
-    fun setService(musicService: MusicService) {
-        this.musicService = musicService
-    }
-
-    fun setTrack(track: Track) {
-        this.track = track
-        bindData(track)
-    }
-
-    fun setLyric(lyric: Lyric) {
-        this.lyric = lyric
-        setUpTabLayoutAndViewPager()
-    }
-
-    fun setProgress(progress: Int) {
-        binding?.apply {
-            seekBarTrack.progress = progress.div(MILIS_TO_SECOND)
-            textElapsed.text = SimpleDateFormat(TIME_PATTERN, Locale.getDefault())
-                .format(musicService?.getCurrentProgress())
-        }
-    }
-
     private fun downloadFileFromUrl() {
-
+        if (track?.isFavorite == false) {
+            track?.let { listener?.checkPermission(it) }
+        } else {
+            context?.showToast(getString(R.string.msg_track_downloaded))
+        }
     }
 
     private fun resumeOrPauseTrack() {
@@ -174,6 +198,10 @@ class BottomSheetPlayer : BottomSheetDialogFragment(), View.OnClickListener {
             buttonBack.setOnClickListener(this@BottomSheetPlayer)
             buttonFavorite.setOnClickListener(this@BottomSheetPlayer)
         }
+    }
+
+    interface DownLoadTrack {
+        fun checkPermission(track: Track)
     }
 
     companion object {
