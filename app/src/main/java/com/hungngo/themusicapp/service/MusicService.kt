@@ -23,7 +23,7 @@ class MusicService : Service() {
     private var notificationManager: NotificationManagerCompat? = null
     private var serviceListener: TrackState? = null
     private var idAlbum: String = ""
-    private var playlistFragmentCallback : UpdatePlaylistFragment? = null
+    private var playlistFragmentCallback: UpdatePlaylistFragment? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -68,12 +68,22 @@ class MusicService : Service() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForeground(
                     FOREGROUND_NOTIFICATION_ID,
-                    createNotification(applicationContext, track, listTracks, musicPlayer?.isPlaying)
+                    createNotification(
+                        applicationContext,
+                        track,
+                        listTracks,
+                        musicPlayer?.isPlaying
+                    )
                 )
             } else {
                 this?.notify(
                     FOREGROUND_NOTIFICATION_ID,
-                    createNotification(applicationContext, track, listTracks, musicPlayer?.isPlaying)
+                    createNotification(
+                        applicationContext,
+                        track,
+                        listTracks,
+                        musicPlayer?.isPlaying
+                    )
                 )
             }
         }
@@ -134,6 +144,7 @@ class MusicService : Service() {
         currentTrackPosition = (currentTrackPosition + 1) % (listTracks.size)
         playTrack(currentTrackPosition)
         serviceListener?.playTrackFinish(currentTrackPosition)
+        playlistFragmentCallback?.updateState(true)
     }
 
     fun previousTrack() {
@@ -141,6 +152,7 @@ class MusicService : Service() {
             if (currentTrackPosition > 0) currentTrackPosition - 1 else listTracks.size - 1
         playTrack(currentTrackPosition)
         serviceListener?.playTrackFinish(currentTrackPosition)
+        playlistFragmentCallback?.updateState(true)
     }
 
     fun resumeTrack() {

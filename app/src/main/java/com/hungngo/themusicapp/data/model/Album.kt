@@ -1,8 +1,9 @@
 package com.hungngo.themusicapp.data.model
 
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 
-data class Album (
+data class Album(
     @SerializedName("album_type")
     val albumType: String? = null,
     @SerializedName("artists")
@@ -29,4 +30,16 @@ data class Album (
     val label: String? = null,
     @SerializedName("tracks")
     val tracks: Tracks? = null
-)
+) {
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<Album>() {
+            override fun areItemsTheSame(oldIem: Album, newItem: Album): Boolean {
+                return oldIem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+}
