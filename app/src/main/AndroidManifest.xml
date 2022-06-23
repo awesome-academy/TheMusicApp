@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hungngo.themusicapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".AndroidApplication"
@@ -34,7 +36,7 @@
             android:enabled="true"
             android:exported="false" />
 
-        <receiver android:name=".service.notification.MyReceiver"/>
+        <receiver android:name=".service.notification.MyReceiver" />
     </application>
 
 </manifest>

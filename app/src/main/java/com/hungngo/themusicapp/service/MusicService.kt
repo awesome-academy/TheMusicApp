@@ -22,6 +22,8 @@ class MusicService : Service() {
     private var currentTrackPosition = 0
     private var notificationManager: NotificationManagerCompat? = null
     private var serviceListener: TrackState? = null
+    private var idAlbum: String = ""
+    private var playlistFragmentCallback : UpdatePlaylistFragment? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -53,6 +55,10 @@ class MusicService : Service() {
         currentTrackPosition = position
     }
 
+    fun setIdAlbum(idAlbum: String) {
+        this.idAlbum = idAlbum
+    }
+
     fun getCurrentProgress() = musicPlayer?.currentPosition
 
     fun getDuration() = musicPlayer?.duration
@@ -62,12 +68,12 @@ class MusicService : Service() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForeground(
                     FOREGROUND_NOTIFICATION_ID,
-                    createNotification(applicationContext, track, musicPlayer?.isPlaying)
+                    createNotification(applicationContext, track, listTracks, musicPlayer?.isPlaying)
                 )
             } else {
                 this?.notify(
                     FOREGROUND_NOTIFICATION_ID,
-                    createNotification(applicationContext, track, musicPlayer?.isPlaying)
+                    createNotification(applicationContext, track, listTracks, musicPlayer?.isPlaying)
                 )
             }
         }
@@ -76,10 +82,10 @@ class MusicService : Service() {
     fun seekToPosition(position: Int?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             position?.let {
-                musicPlayer?.seekTo(it.toLong(), MediaPlayer.SEEK_CLOSEST)
+                musicPlayer?.seekTo(it.toLong() * SECOND_TO_MILIS, MediaPlayer.SEEK_CLOSEST)
             }
         } else {
-            position?.let { musicPlayer?.seekTo(it) }
+            position?.let { musicPlayer?.seekTo(it * SECOND_TO_MILIS.toInt()) }
         }
     }
 
@@ -99,7 +105,7 @@ class MusicService : Service() {
             track = listTracks[position]
 
             reset()
-            setDataSource(url)
+            url?.let { setDataSource(it) }
             prepare()
             start()
 
@@ -121,6 +127,7 @@ class MusicService : Service() {
             }
         }
         pushNotification()
+        playlistFragmentCallback?.updateState(false)
     }
 
     fun nextTrack() {
@@ -130,7 +137,8 @@ class MusicService : Service() {
     }
 
     fun previousTrack() {
-        currentTrackPosition = if (currentTrackPosition > 0) currentTrackPosition - 1 else listTracks.size - 1
+        currentTrackPosition =
+            if (currentTrackPosition > 0) currentTrackPosition - 1 else listTracks.size - 1
         playTrack(currentTrackPosition)
         serviceListener?.playTrackFinish(currentTrackPosition)
     }
@@ -141,19 +149,29 @@ class MusicService : Service() {
             musicPlayer?.start()
         }
         pushNotification()
+        playlistFragmentCallback?.updateState(true)
     }
 
     fun setListener(serviceListener: TrackState) {
         this.serviceListener = serviceListener
     }
 
+    fun setPlaylistListener(playlistFragmentCallback: UpdatePlaylistFragment) {
+        this.playlistFragmentCallback = playlistFragmentCallback
+    }
+
     fun getIntent() = Intent(applicationContext, MusicService::class.java)
+
+    interface UpdatePlaylistFragment {
+        fun updateState(isPlaying: Boolean)
+    }
 
     inner class MyMusicBinder : Binder() {
         fun getService(): MusicService = this@MusicService
     }
 
     companion object {
+        const val SECOND_TO_MILIS = 1000L
         const val FOREGROUND_NOTIFICATION_ID = 1
     }
 }
