@@ -46,4 +46,13 @@
             app:nullable="true"
             android:defaultValue=' ' />
     </fragment>
+    <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="com.hungngo.themusicapp.ui.no_internet.NoInternetFragment"
+        android:label="fragment_no_internet"
+        tools:layout="@layout/fragment_no_internet" >
+        <action
+            android:id="@+id/action_noInternetFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
 </navigation>

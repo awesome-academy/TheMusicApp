@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ItemArtist(
     @SerializedName("profile")
-    val profile: Profile,
+    val profile: Profile? = null,
     @SerializedName("uri")
-    val uri: String
+    val uri: String? = null
 )

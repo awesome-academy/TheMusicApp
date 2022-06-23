@@ -9,22 +9,21 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.os.bundleOf
 import androidx.media.app.NotificationCompat.MediaStyle
 import com.hungngo.themusicapp.R
-import com.hungngo.themusicapp.data.model.Album
 import com.hungngo.themusicapp.data.model.Track
 import com.hungngo.themusicapp.ui.main.MainActivity
 import com.hungngo.themusicapp.utils.Constant
-import java.io.Serializable
 import kotlin.random.Random
 
 private const val MEDIA_SESSION_TAG = "tag"
 
-fun createNotificationChannel(context: Context, notificationManagerCompat: NotificationManagerCompat?) {
+fun createNotificationChannel(
+    context: Context,
+    notificationManagerCompat: NotificationManagerCompat?
+) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val notificationChannel = NotificationChannel(
             context.getString(R.string.msg_channel_id),
@@ -35,16 +34,16 @@ fun createNotificationChannel(context: Context, notificationManagerCompat: Notif
     }
 }
 
-fun createNotification(context: Context, track: Track?, listTracks: List<Track>, isPlaying: Boolean?): Notification {
+fun createNotification(
+    context: Context,
+    track: Track?,
+    listTracks: List<Track>,
+    isPlaying: Boolean?
+): Notification {
     val mediaSessionCompat = MediaSessionCompat(context, MEDIA_SESSION_TAG)
     val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.bg_notification_music)
     val intent = Intent(context, MainActivity::class.java).also {
-        val bundle = bundleOf(
-            Constant.BUNDLE_LIST_TRACKS to listTracks as Serializable,
-            Constant.BUNDLE_TRACK_POS to track?.trackNumber
-        )
-        it.putExtras(bundle)
-        it.action = Constant.ACTION_OPEN_ACTIVITY
+        it.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
     }
     val intentBack: PendingIntent =
         PendingIntent.getActivity(context, Random.nextInt(), intent, PendingIntent.FLAG_IMMUTABLE)

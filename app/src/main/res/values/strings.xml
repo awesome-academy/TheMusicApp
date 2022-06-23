@@ -29,4 +29,5 @@
     <string name="title_alert_delete">Delete Local Track</string>
     <string name="msg_alert_delete">Are you sure to delete this track?</string>
     <string name="msg_track_downloaded">You already have this track</string>
+    <string name="title_play_local">Play local</string>
 </resources>
